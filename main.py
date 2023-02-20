@@ -4,16 +4,16 @@ from random import choice
 
 BACKGROUND_COLOR = "#B1DDC6"
 words = pd.read_csv("data/french_words.csv")
-list_of_words = words["French"].to_list()
+list_of_words = words.to_dict(orient="records")
+print(choice(list_of_words)["French"])
 
 def change_word():
-    word = choice(list_of_words)
-    canvas.itemconfig(french, text=word)
+    answers = choice(list_of_words)
+    canvas.itemconfig(french, text=answers['French'])
 
 # UI CREATION
 window = Tk()
 window.config(bg=BACKGROUND_COLOR, pady=50, padx=50)
-
 card_front = PhotoImage(file="images/card_front.png")
 tick = PhotoImage(file="images/right.png")
 wrong = PhotoImage(file="images/wrong.png")
